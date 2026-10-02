@@ -36,7 +36,7 @@ class GroqProvider(BaseProvider):
         tools: Optional[List[Dict[str, Any]]] = None,
         temperature: float = 0.7,
         max_tokens: Optional[int] = None,
-        timeout: float = 60.0,
+        timeout: float = 45.0,
         **kwargs: Any,
     ) -> AIResponse:
         if not api_key or not api_key.strip():

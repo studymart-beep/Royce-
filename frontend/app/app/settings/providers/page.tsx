@@ -10,6 +10,7 @@ const CATALOG = [
   { id: "gemini", name: "Gemini", defaultModel: "gemini-3.8-flash" },
   { id: "groq", name: "Groq", defaultModel: "llama-3.3-70b-versatile" },
   { id: "cerebras", name: "Cerebras", defaultModel: "llama3.1-8b" },
+  { id: "openrouter", name: "OpenRouter", defaultModel: "google/gemini-2.5-flash" },
 ];
 
 export default function ProvidersSettingsPage() {
@@ -60,7 +61,7 @@ export default function ProvidersSettingsPage() {
       await api.upsertProvider(token, providerId, {
         api_key: keyInput.trim(),
         preferred_model: cat?.defaultModel,
-        priority: providerId === "gemini" ? 10 : providerId === "groq" ? 20 : 30,
+        priority: providerId === "gemini" ? 10 : providerId === "groq" ? 20 : providerId === "openrouter" ? 15 : 30,
         is_enabled: true,
       });
       setEditing(null);

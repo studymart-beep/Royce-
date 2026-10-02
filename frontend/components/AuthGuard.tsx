@@ -2,7 +2,7 @@
 
 import { useEffect, useState, type ReactNode } from "react";
 import { useRouter } from "next/navigation";
-import { getSession } from "@/lib/auth";
+import { getSupabase } from "@/lib/supabase";
 
 export function AuthGuard({ children }: { children: ReactNode }) {
   const router = useRouter();
@@ -10,17 +10,36 @@ export function AuthGuard({ children }: { children: ReactNode }) {
 
   useEffect(() => {
     let cancelled = false;
+    const supabase = getSupabase();
+
+    // Restore session from localStorage first (survives tab close / return visits)
     (async () => {
-      const session = await getSession();
+      const { data } = await supabase.auth.getSession();
       if (cancelled) return;
-      if (!session) {
+      if (!data.session) {
         router.replace("/login");
         return;
       }
       setReady(true);
     })();
+
+    const {
+      data: { subscription },
+    } = supabase.auth.onAuthStateChange((event, session) => {
+      if (cancelled) return;
+      if (event === "SIGNED_OUT" || !session) {
+        setReady(false);
+        router.replace("/login");
+        return;
+      }
+      if (event === "SIGNED_IN" || event === "TOKEN_REFRESHED" || event === "INITIAL_SESSION") {
+        setReady(true);
+      }
+    });
+
     return () => {
       cancelled = true;
+      subscription.unsubscribe();
     };
   }, [router]);
 

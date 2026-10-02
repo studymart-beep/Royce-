@@ -80,7 +80,9 @@ class AIRouter:
         tools: Optional[List[Dict[str, Any]]] = None,
         preferred_provider: Optional[str] = None,
         request_id: Optional[str] = None,
-        timeout: float = 60.0,
+        timeout: float = 45.0,
+        temperature: float = 0.55,
+        max_tokens: Optional[int] = 1024,
         **kwargs: Any,
     ) -> AIResponse:
         if not user_id:
@@ -124,6 +126,8 @@ class AIRouter:
                     model=effective_model,
                     tools=tools,
                     timeout=timeout,
+                    temperature=temperature,
+                    max_tokens=max_tokens,
                     **kwargs,
                 )
                 latency_ms = int((time.perf_counter() - start) * 1000)

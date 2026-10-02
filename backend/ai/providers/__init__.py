@@ -2,11 +2,13 @@ from ai.providers.base import BaseProvider
 from ai.providers.gemini import GeminiProvider
 from ai.providers.groq import GroqProvider
 from ai.providers.cerebras import CerebrasProvider
+from ai.providers.openrouter import OpenRouterProvider
 
 PROVIDER_REGISTRY = {
     "gemini": GeminiProvider,
     "groq": GroqProvider,
     "cerebras": CerebrasProvider,
+    "openrouter": OpenRouterProvider,
 }
 
 

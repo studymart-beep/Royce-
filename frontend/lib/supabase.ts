@@ -15,6 +15,10 @@ export function getSupabase(): SupabaseClient {
         persistSession: true,
         autoRefreshToken: true,
         detectSessionInUrl: true,
+        storage:
+          typeof window !== "undefined" ? window.localStorage : undefined,
+        storageKey: "royce-auth",
+        flowType: "pkce",
       },
     });
   }

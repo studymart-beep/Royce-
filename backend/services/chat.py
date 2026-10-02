@@ -25,11 +25,11 @@ from schemas.chat import ChatRequest, ChatResponse, TokenUsageSchema
 
 logger = logging.getLogger("royce.chat")
 
-RECENT_MESSAGE_LIMIT = 20
-SYSTEM_PROMPT = (
-    "You are Royce, a personal AI assistant. Be helpful, concise, and accurate. "
-    "Use the provided context and memories when relevant."
-)
+RECENT_MESSAGE_LIMIT = 12
+
+from ai.prompts import ROYCE_SYSTEM_PROMPT
+
+SYSTEM_PROMPT = ROYCE_SYSTEM_PROMPT
 
 
 class ChatService:
@@ -153,7 +153,7 @@ class ChatService:
         )
 
         # Tool loop (max 3 rounds)
-        for _round in range(3):
+        for _round in range(2):
             if not ai_response.tool_calls:
                 break
             for tc in ai_response.tool_calls:
