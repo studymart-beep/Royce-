@@ -1,3 +1,4 @@
+import type { ReactNode } from "react";
 import { BottomNav } from "@/components/BottomNav";
 import { Sidebar } from "@/components/Sidebar";
 import { AuthGuard } from "@/components/AuthGuard";
