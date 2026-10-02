@@ -7,7 +7,7 @@ import { api, type ProviderView } from "@/lib/api";
 import { getAccessToken } from "@/lib/auth";
 
 const CATALOG = [
-  { id: "gemini", name: "Gemini", defaultModel: "gemini-2.0-flash" },
+  { id: "gemini", name: "Gemini", defaultModel: "gemini-3.8-flash" },
   { id: "groq", name: "Groq", defaultModel: "llama-3.3-70b-versatile" },
   { id: "cerebras", name: "Cerebras", defaultModel: "llama3.1-8b" },
 ];

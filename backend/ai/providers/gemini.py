@@ -18,7 +18,7 @@ from ai.types import (
 logger = logging.getLogger("royce.ai.gemini")
 
 # Stable default; can be overridden per-user or per-request
-DEFAULT_MODEL = "gemini-2.0-flash"
+DEFAULT_MODEL = "gemini-3.8-flash"
 
 
 class GeminiProvider(BaseProvider):
